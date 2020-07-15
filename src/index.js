@@ -23,16 +23,19 @@ class Board extends React.Component {
 
     handleClick(i) {
         const squares = this.state.squares.slice();
-        const checkSquares = this.state.checkSquares.slice();
-        if (checkSquares[i]) {
-            checkSquares[i] = false;
-            squares[i] = this.state.xIsNext ? 'X' : 'O';
-            this.setState({
-                squares: squares,
-                xIsNext: !this.state.xIsNext,
-                checkSquares: checkSquares,
-            });
+        if (squares[i] || calculateWinner(squares)) {
+            return
         }
+        // const checkSquares = this.state.checkSquares.slice();
+        // if (checkSquares[i] || ) {
+        // checkSquares[i] = false;
+        squares[i] = this.state.xIsNext ? 'X' : 'O';
+        this.setState({
+            squares: squares,
+            xIsNext: !this.state.xIsNext,
+            // checkSquares: checkSquares,
+        });
+        // }
 
     }
 
